@@ -9,5 +9,12 @@
 
 The student is confirmed:
 <span th:text="${student.firstName} +' '+${student.lastName}+' comes from '+${student.country}+'.'" />
+<br><br>
+Favorate Programming Language: <span th:text="${student.favorateLanguage}" />
+<br><br>
+Favorate OS:
+<ul>
+<li  th:each="s: ${student.os}" th:text="${s}"/>
+</ul>
 </body>
 </html>
