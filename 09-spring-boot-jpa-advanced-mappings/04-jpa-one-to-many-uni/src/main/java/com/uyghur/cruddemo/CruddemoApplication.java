@@ -4,6 +4,7 @@ import com.uyghur.cruddemo.dao.AppDAO;
 import com.uyghur.cruddemo.entity.Course;
 import com.uyghur.cruddemo.entity.Instructor;
 import com.uyghur.cruddemo.entity.InstructorDetail;
+import com.uyghur.cruddemo.entity.Review;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,28 +23,40 @@ public class CruddemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AppDAO appDAO){
 		return runner -> {
-//			createInstructor(appDAO);
-//			findInstructor(appDAO);
-//			deleteInstructor(appDAO);
 
-//			findInstructorDetail(appDAO);
-//			deleteInstructorDetail(appDAO);
-//			createInstructorWithCourses(appDAO);
-//			findInstructorWithCourses(appDAO);
-
-//			findCoursesByInstructor(appDAO);
-
-//			findInstructorWithCoursesJoinFetch(appDAO);
-
-//			updateInstructor(appDAO);
-
-//			updateCourse(appDAO);
-
-//			deleteInstructor(appDAO);
-
-			deleteCourse(appDAO);
+//			createCourseAndReviews(appDAO);
+//			retrieveCourseAndReviews(appDAO);
+			deleteCourseAndReviews(appDAO);
 
 		};
+	}
+
+	private void deleteCourseAndReviews(AppDAO appDAO) {
+		int id=10;
+		System.out.println("Deleting course id: "+id);
+		appDAO.deleteCourseById(id);
+		System.out.println("Done!");
+	}
+
+	private void retrieveCourseAndReviews(AppDAO appDAO) {
+		int id = 10;
+		Course course = appDAO.findCourseAndReviewsByCourseId(id);
+		System.out.println(course);
+		System.out.println(course.getReviews());
+		System.out.println("Done!");
+	}
+
+	private void createCourseAndReviews(AppDAO appDAO) {
+		Course course = new Course("Java - Spring boot");
+		course.addReview(new Review("Really great course I have ever taken so far"));
+		course.addReview(new Review("Cool course"));
+		course.addReview(new Review("What a dumb course"));
+		System.out.println("Saving the course...");
+		System.out.println(course);
+		System.out.println(course.getReviews());
+		appDAO.save(course);
+		System.out.println("Done!");
+
 	}
 
 	private void deleteCourse(AppDAO appDAO) {
