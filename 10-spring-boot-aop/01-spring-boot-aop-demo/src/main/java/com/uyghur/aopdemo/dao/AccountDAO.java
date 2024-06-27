@@ -1,6 +1,8 @@
 package com.uyghur.aopdemo.dao;
 
+import com.uyghur.aopdemo.Account;
+
 public interface AccountDAO {
 
-    void addAccount();
+    void addAccount(Account account, boolean vipFlag);
 }
