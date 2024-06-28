@@ -29,7 +29,10 @@ public class AopdemoApplication {
 		Account account = new Account();
 
 		accountDAO.addAccount(account, true);
+		accountDAO.doWork();
+
 		membershipDAO.addAccount();
+		membershipDAO.goToSleep();
 
 
 	}
